@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    public function apartments()
+    public function apartment()
     {
         return $this->belongsTo(Apartment::class);
     }
