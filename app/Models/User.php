@@ -13,10 +13,11 @@ class User extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
 
-        public function apartment(){
-            return $this-> belongsTo (Apartment::class);
-        }
-     
+    public function apartments()
+    {
+        return $this->hasMany(Apartment::class);
+    }
+
 
     protected $fillable = [
         'name',
