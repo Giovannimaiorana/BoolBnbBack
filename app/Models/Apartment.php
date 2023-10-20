@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
 {
+    public function users(){
+        return $this->hasMany (User::class);
+    }
     use HasFactory;
 }

@@ -28,6 +28,9 @@ return new class extends Migration
             $table->tinyInteger('visible')->unsigned()->default(1);
 
             $table->timestamps();
+            $table->unsignedBigInteger("user_id");
+            $table-> foreign("user_id")-> references ("id")-> on("users")->onDelete("cascade");
+
         });
     }
 
