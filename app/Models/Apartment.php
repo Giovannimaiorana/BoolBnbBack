@@ -10,5 +10,9 @@ class Apartment extends Model
     public function users(){
         return $this->hasMany (User::class);
     }
+    public function sponsorships(){
+        return $this->belongsToMany(sponsorship::class);
+    }
+    
     use HasFactory;
 }

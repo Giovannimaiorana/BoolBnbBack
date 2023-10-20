@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class sponsorship extends Model
 {
+    public function apartments(){
+        return $this->belongsToMany (apartment::class);
+    }
     use HasFactory;
 }
