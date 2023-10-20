@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('sponsorships', function (Blueprint $table) {
-            $table->id('sponsorship_id');
+            $table->id();
             $table->string('name', 40)->nullable(false);
             $table->decimal('price', 11, 8)->nullable(false);
             $table->time('duration')->nullable(false);

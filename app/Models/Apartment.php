@@ -21,7 +21,9 @@ class Apartment extends Model
         return $this->hasMany(Message::class);
     }
     public function sponsorships(){
+
         return $this->belongsToMany(sponsorship::class);
+        
     }
     
     use HasFactory;
