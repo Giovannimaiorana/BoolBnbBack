@@ -10,7 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-
     use HasApiTokens, HasFactory, Notifiable;
 
     public function apartments()
@@ -21,6 +20,7 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'last_name',
         'email',
         'password',
         'birth_day',

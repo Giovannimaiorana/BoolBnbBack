@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
+    protected $fillabe = ["name"];
     public function apartments(){
         return $this->belongsToMany (apartment::class);
     }
