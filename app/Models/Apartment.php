@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
-{
+{ 
+    protected $fillabe = ["name","rooms","beds","bathrooms","mq","address","lat","lon","photo","visible","user_id"];
+    
     public function visits()
     {
         return $this->hasMany(Visit::class);
