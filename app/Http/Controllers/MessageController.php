@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\models\Message;
 
 class MessageController extends Controller
 {
@@ -11,9 +12,10 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $messages = Message::all();
+        return view("messages.index", compact("messages"));
     }
 
     /**
@@ -23,7 +25,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        return view('messages.create');
     }
 
     /**
@@ -34,7 +36,16 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $message = new Message;
+        $message->name = $data["name"];
+        $message->lastname = $data["lastname"];
+        $message->email = $data["email"];
+        $message->text = $data["text"];
+        $message->save();
+
+        return redirect()->route("messages.show", $message);
     }
 
     /**
@@ -43,9 +54,9 @@ class MessageController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Message $message)
     {
-        //
+        return view("messages.show", compact("messages"));
     }
 
     /**
