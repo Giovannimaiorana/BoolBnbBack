@@ -16,7 +16,8 @@ class ApartmentController extends Controller
     public function index()
     {
         $apartments = Apartment::all();
-        return view("apartments.index", compact("apartments"));
+        return view("admin.addApartment", compact("apartments"));
+        
     }
 
     /**
@@ -26,7 +27,7 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('apartments.create');
+        return view('admin.addApartment');
     }
 
     /**
@@ -39,7 +40,7 @@ class ApartmentController extends Controller
     {
         $validatedData = $request->validated();
         // DA RIVEDERE LO SLUG
-        $validatedData['slug'] = Str::slug($validatedData['name']);
+        //$validatedData['slug'] = Str::slug($validatedData['name']);
         $apartment = Apartment::create($validatedData);
         return redirect()->route('apartments.index');
     }
