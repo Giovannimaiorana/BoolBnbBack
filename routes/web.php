@@ -2,7 +2,7 @@
 
 
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\Admin\ApartmentController;
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +23,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/addApartment', [ApartmentController::class,'index'])->name('addApartment');
+// Route::get('/addApartment', [ApartmentController::class, 'index'])->name('addApartment');
 
 
 
@@ -36,6 +36,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::resource('apartments', ApartmentController::class);
+    // Route::resource('products', ProductController::class);
+    // Route::delete('delete-image/{path}', [DeleteImg::class, 'delete'])->name('delete.img');
+    // Route::resource('ordersDetails', OrderDetailsController::class)->only('index', 'show');
 });
 
 require __DIR__ . '/auth.php';

@@ -8,7 +8,7 @@
                     <div class="card-header">{{ __('Add Apartment') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('dashboard') }}">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('apartments.store') }}">
                             @csrf
                             {{-- NAME --}}
                             <div class="mb-4 row">

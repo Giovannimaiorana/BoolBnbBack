@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+
 
 class StoreApartmentRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class StoreApartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,6 +23,15 @@ class StoreApartmentRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+
+    public function prepareForValidation()
+    {
+        $user_id = Auth::id();
+        $this->merge([
+            'user_id' => $user_id
+        ]);
+    }
+
     public function rules()
     {
         return [
@@ -33,13 +44,42 @@ class StoreApartmentRequest extends FormRequest
             'lon' => ['required', 'numeric', 'min:-999', 'max:999'],
 
             'address' => ['required', 'min:3', 'max:100'],
-            'photo' => ['required', 'min:3', 'max:255'],
-            'visible' => ['required', 'in:0,1'],
+            'photo' => ['min:0', 'max:255'],
+            // 'visible' => ['required', 'in:0,1'],
 
 
-            'slug' => 'nullable',
+            // 'slug' => 'nullable',
 
             'user_id' => 'required'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Il nome è richiesto',
+            // 'name.max' => 'Il nome deve essere lungo massimo :max caratteri',
+            // 'name.min' => 'Il nome deve essere lungo almeno :min caratteri',
+
+            // 'price.required' => 'Il prezzo è richiesto',
+            // 'price.numeric' => 'Il prezzo deve essere un valore numerico',
+            // 'price.max' => 'Il prezzo non può essere superiore a :max',
+            // 'price.min' => 'Il prezzo non può essere negativo',
+
+            // 'visibility.required' => 'Seleziona un campo',
+            // 'visibility.in' => 'Errore nel campo "avaiable", il valore deve essere 0 o 1',
+
+
+            // 'description.required' => 'La descrizione è richiesta',
+            // 'description.max' => 'La descrizione deve essere lunga massimo :max caratteri',
+            // 'description.min' => 'La descrizione deve essere lunga almeno :min caratteri',
+
+
         ];
     }
 }

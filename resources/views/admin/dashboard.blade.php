@@ -5,7 +5,11 @@
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Dashboard') }}
         </h2>
-        <a href="{{ route('addApartment') }}">Add Appartment</a>
+        <a href="{{ route('apartments.create') }}">Add Appartment</a>
+
+        @foreach ($apartments as $apartment)
+            {{ $apartment->name }}
+        @endforeach
         <div class="row justify-content-center">
             <div class="col">
                 <div class="card">
