@@ -5,27 +5,26 @@
         <h2 class="fs-4 text-secondary my-4">
             {{ __('Dashboard') }}
         </h2>
-        <a href="{{ route('apartments.create') }}">Add Appartment</a>
+        <a class="btn btn-primary mb-2" href="{{ route('apartments.create') }}">Add Appartment</a>
 
-        @foreach ($apartments as $apartment)
-            {{ $apartment->name }}
-        @endforeach
+
+
         <div class="row justify-content-center">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">{{ __('User Dashboard') }}</div>
-
+            <!-- Single apartment -->
+            @foreach ($apartments as $apartment)
+                <div class="card my-4">
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-
-                        {{ __('You are logged in!') }}
+                        <h5 class="card-title">{{ $apartment->name }}</h5>
+                        <a href="{{ route('apartments.show', $apartment->id) }}" class="btn btn-warning">Show</a>
+                        <form action="{{ route('apartments.destroy', $apartment->id) }}" method="POST"
+                            style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Sei sicuro di voler eliminare questo appartamento?')">Delete</button>
+                        </form>
                     </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection

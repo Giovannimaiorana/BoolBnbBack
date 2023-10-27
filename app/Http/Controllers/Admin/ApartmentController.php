@@ -19,11 +19,12 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartmentId = Auth::user()->apartments->id;
-        //ANDIAMO A PRENDERE IL SINGOLO APPARTAMENTO
-        $apartment = Apartment::where('apartment_id', $apartmentId)->get();
+        $apartments = Apartment::all();
 
-        return view('admin.apartments.index', compact("apartment"));
+        //ANDIAMO A PRENDERE IL SINGOLO APPARTAMENTO
+        //$apartment = Apartment::where('apartment_id', $apartmentId)->get();
+
+        return view('admin.apartments.index', compact("apartments"));
     }
 
     /**
@@ -71,7 +72,13 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $apartment = Apartment::find($id);
+
+        if (!$apartment) {
+            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        }
+    
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -82,7 +89,13 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $apartment = Apartment::find($id);
+
+        if (!$apartment) {
+            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        }
+    
+        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -94,7 +107,16 @@ class ApartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apartment = Apartment::find($id);
+
+        if (!$apartment) {
+            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        }
+    
+        // Valida e aggiorna i dati dell'appartamento
+        $apartment->update($request->all());
+    
+        return redirect()->route('apartments.index')->with('success', 'Appartamento aggiornato con successo');
     }
 
     /**
@@ -105,6 +127,12 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $apartment = Apartment::find($id);
+        if (!$apartment) {
+            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        }
+        $apartment->delete();
+        return redirect()->route('apartments.index')->with('success', 'Appartamento eliminato con successo');
+
     }
 }
