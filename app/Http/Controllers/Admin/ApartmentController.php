@@ -19,7 +19,13 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        $apartments = Apartment::all();
+        $user_id = Auth::id();
+
+        $apartments = Apartment::where('user_id', $user_id)->get();
+
+
+        // $restaurantId = Auth::user()->restaurant->id;
+        // $products = Product::where('restaurant_id', $restaurantId)->get();
 
         //ANDIAMO A PRENDERE IL SINGOLO APPARTAMENTO
         //$apartment = Apartment::where('apartment_id', $apartmentId)->get();
@@ -72,13 +78,15 @@ class ApartmentController extends Controller
      */
     public function show($id)
     {
+
+        $user_id = Auth::id();
         $apartment = Apartment::find($id);
 
-        if (!$apartment) {
-            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        if ($apartment && $user_id == $apartment->user_id) {
+            return view('admin.apartments.show', compact('apartment'));
+        } else {
+            return view('admin.hacker.error');
         }
-    
-        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -94,7 +102,7 @@ class ApartmentController extends Controller
         if (!$apartment) {
             return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
         }
-    
+
         return view('admin.apartments.edit', compact('apartment'));
     }
 
@@ -112,10 +120,10 @@ class ApartmentController extends Controller
         if (!$apartment) {
             return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
         }
-    
+
         // Valida e aggiorna i dati dell'appartamento
         $apartment->update($request->all());
-    
+
         return redirect()->route('apartments.index')->with('success', 'Appartamento aggiornato con successo');
     }
 
@@ -133,6 +141,5 @@ class ApartmentController extends Controller
         }
         $apartment->delete();
         return redirect()->route('apartments.index')->with('success', 'Appartamento eliminato con successo');
-
     }
 }
