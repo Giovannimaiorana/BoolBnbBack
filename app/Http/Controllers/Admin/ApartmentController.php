@@ -97,13 +97,14 @@ class ApartmentController extends Controller
      */
     public function edit($id)
     {
+        $user_id = Auth::id();
         $apartment = Apartment::find($id);
 
-        if (!$apartment) {
-            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        if ($apartment && $user_id == $apartment->user_id) {
+            return view('admin.apartments.edit', compact('apartment'));
+        } else {
+            return view('admin.hacker.error');
         }
-
-        return view('admin.apartments.edit', compact('apartment'));
     }
 
     /**
@@ -135,11 +136,17 @@ class ApartmentController extends Controller
      */
     public function destroy($id)
     {
+        $user_id = Auth::id();
+
         $apartment = Apartment::find($id);
-        if (!$apartment) {
-            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+
+
+        if ($apartment && $user_id == $apartment->user_id) {
+
+            $apartment->delete();
+            return redirect()->route('apartments.index')->with('success', 'Appartamento eliminato con successo');
+        } else {
+            return view('admin.hacker.error');
         }
-        $apartment->delete();
-        return redirect()->route('apartments.index')->with('success', 'Appartamento eliminato con successo');
     }
 }
