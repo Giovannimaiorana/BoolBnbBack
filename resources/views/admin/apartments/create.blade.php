@@ -139,7 +139,7 @@
 
                                 <div class="col-md-6">
                                     <input id="lon" type="number"
-                                        class="form-control @error('lat') is-invalid @enderror" name="lon"
+                                        class="form-control @error('lon') is-invalid @enderror" name="lon"
                                         value="{{ old('lon') }}" autocomplete="lon">
 
                                     @error('lon')

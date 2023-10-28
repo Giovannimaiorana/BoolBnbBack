@@ -114,18 +114,21 @@ class ApartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreApartmentRequest $request, $id)
     {
+        $user_id = Auth::id();
+
         $apartment = Apartment::find($id);
 
-        if (!$apartment) {
-            return redirect()->route('apartments.index')->with('error', 'Appartamento non trovato');
+        if ($apartment && $user_id == $apartment->user_id) {
+
+            // Valida e aggiorna i dati dell'appartamento
+            $apartment->update($request->all());
+
+            return redirect()->route('apartments.index')->with('success', 'Appartamento aggiornato con successo');
+        } else {
+            return view('admin.hacker.error');
         }
-
-        // Valida e aggiorna i dati dell'appartamento
-        $apartment->update($request->all());
-
-        return redirect()->route('apartments.index')->with('success', 'Appartamento aggiornato con successo');
     }
 
     /**
