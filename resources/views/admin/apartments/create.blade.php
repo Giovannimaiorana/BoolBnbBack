@@ -166,6 +166,36 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            {{-- VISIBILITY --}}
+                            <div class="mb-4 row">
+                                <label for="visible" class="col-md-4 col-form-label text-md-right">Visible <span
+                                        class="text-danger">*</span></label>
+                                <div class="col-md-6">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input @error('visible') is-invalid @enderror"
+                                            type="radio" name="visible" id="visible_yes" value="1" checked
+                                            {{ old('visible') == '1' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="visible_yes">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline mx-3">
+                                        <input class="form-check-input @error('visible') is-invalid @enderror"
+                                            type="radio" name="visible" id="visible_no" value="0"
+                                            {{ old('visible') == '0' ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="visible_no">No</label>
+                                        @error('visible')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
                             <div class="mb-4 row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

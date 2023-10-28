@@ -45,8 +45,7 @@ class StoreApartmentRequest extends FormRequest
 
             'address' => ['required', 'min:3', 'max:100'],
             'photo' => ['min:0', 'max:255'],
-            // 'visible' => ['required', 'in:0,1'],
-
+            'visible' => ['required', 'in:0,1'],
 
             // 'slug' => 'nullable',
 
@@ -99,6 +98,9 @@ class StoreApartmentRequest extends FormRequest
             'address.required' => "L'indirizzo è richiesto",
             'address.max' => 'Il nome deve essere lungo massimo :max caratteri',
             'address.min' => 'Il nome deve essere lungo almeno :min caratteri',
+
+            'visible.required' => 'Seleziona un campo',
+            'visible.in' => 'Errore nel campo "avaiable", il valore deve essere 0 o 1',
 
         ];
     }

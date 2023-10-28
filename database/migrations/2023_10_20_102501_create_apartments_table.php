@@ -25,7 +25,7 @@ return new class extends Migration
             $table->decimal('lat', 11, 8);
             $table->decimal('lon', 11, 8);
             $table->string('photo', 255);
-            $table->tinyInteger('visible')->unsigned()->default(1);
+            $table->boolean('visible')->nullable(false);
 
             $table->timestamps();
             $table->unsignedBigInteger("user_id");
