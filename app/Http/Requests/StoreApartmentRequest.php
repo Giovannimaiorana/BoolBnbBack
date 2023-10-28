@@ -63,22 +63,42 @@ class StoreApartmentRequest extends FormRequest
     {
         return [
             'name.required' => 'Il nome è richiesto',
-            // 'name.max' => 'Il nome deve essere lungo massimo :max caratteri',
-            // 'name.min' => 'Il nome deve essere lungo almeno :min caratteri',
+            'name.max' => 'Il nome deve essere lungo massimo :max caratteri',
+            'name.min' => 'Il nome deve essere lungo almeno :min caratteri',
 
-            // 'price.required' => 'Il prezzo è richiesto',
-            // 'price.numeric' => 'Il prezzo deve essere un valore numerico',
-            // 'price.max' => 'Il prezzo non può essere superiore a :max',
-            // 'price.min' => 'Il prezzo non può essere negativo',
+            'rooms.required' => 'Il numero di stanze è richiesto',
+            'rooms.numeric' => 'Inesrisci un valore numerico intero',
+            'rooms.max' => 'Non puoi inserire più di :max stanze',
+            'rooms.min' => 'Inserisci un valore non negativo',
 
-            // 'visibility.required' => 'Seleziona un campo',
-            // 'visibility.in' => 'Errore nel campo "avaiable", il valore deve essere 0 o 1',
+            'beds.required' => 'Il numero di letti è richiesto',
+            'beds.numeric' => 'Inesrisci un valore numerico intero',
+            'beds.max' => 'Non puoi inserire più di :max letti',
+            'beds.min' => 'Inserisci un valore non negativo',
 
+            'bathrooms.required' => 'Il numero di bagni è richiesto',
+            'bathrooms.numeric' => 'Inesrisci un valore numerico intero',
+            'bathrooms.max' => 'Non puoi inserire più di :max bagni',
+            'bathrooms.min' => 'Inserisci un valore non negativo',
 
-            // 'description.required' => 'La descrizione è richiesta',
-            // 'description.max' => 'La descrizione deve essere lunga massimo :max caratteri',
-            // 'description.min' => 'La descrizione deve essere lunga almeno :min caratteri',
+            'mq.required' => 'I mq sono richiesti',
+            'mq.numeric' => 'Inesrisci un valore numerico intero',
+            'mq.max' => 'Non puoi inserire più di :max mq',
+            'mq.min' => 'Inserisci un valore non negativo',
 
+            'lat.required' => 'La latitudine è richiesta',
+            'lat.numeric' => 'Inesrisci un valore numerico',
+            'lat.max' => 'Non puoi inserire più di :max in latitudine',
+            'lat.min' => 'Non puoi inserire meno di :min in latitudine',
+
+            'lon.required' => 'La longitudine è richiesta',
+            'lon.numeric' => 'Inesrisci un valore numerico',
+            'lon.max' => 'Non puoi inserire più di :max in longitudine',
+            'lon.min' => 'Non puoi inserire meno di :min in longitudine',
+
+            'address.required' => "L'indirizzo è richiesto",
+            'address.max' => 'Il nome deve essere lungo massimo :max caratteri',
+            'address.min' => 'Il nome deve essere lungo almeno :min caratteri',
 
         ];
     }
