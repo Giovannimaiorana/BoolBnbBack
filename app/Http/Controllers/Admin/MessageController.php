@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\models\Message;
 
@@ -12,10 +15,12 @@ class MessageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index($apartment_id)
     {
-        $messages = Message::all();
-        return view("messages.index", compact("messages"));
+        $messages = Message::where('apartment_id', $apartment_id)->get();
+        $apartment_name = Apartment::where('id', $apartment_id)->value('name');
+
+        return view("admin.messages.index", compact("messages", "apartment_name"));
     }
 
     /**
@@ -56,7 +61,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        return view("messages.show", compact("messages"));
+        // return view("messages.show", compact("messages"));
     }
 
     /**
