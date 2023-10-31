@@ -24,13 +24,12 @@ return new class extends Migration
             $table->string('address', 100)->nullable(false);
             $table->decimal('lat', 11, 8);
             $table->decimal('lon', 11, 8);
-            $table->string('photo', 255)->nullable(false);
-            $table->tinyInteger('visible')->unsigned()->default(1);
+            $table->string('photo', 255);
+            $table->boolean('visible')->nullable(false);
 
             $table->timestamps();
             $table->unsignedBigInteger("user_id");
-            $table-> foreign("user_id")-> references ("id")-> on("users")->onDelete("cascade");
-
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
         });
     }
 

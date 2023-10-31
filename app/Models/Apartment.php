@@ -6,9 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
-{ 
-    protected $fillabe = ["name","rooms","beds","bathrooms","mq","address","lat","lon","photo","visible","user_id"];
-    
+{
+    use HasFactory;
+    protected $fillable = ["name", "rooms", "beds", "bathrooms", "mq", "address", "lat", "lon", "photo", "visible", "user_id"];
+
     public function visits()
     {
         return $this->hasMany(Visit::class);
@@ -22,16 +23,14 @@ class Apartment extends Model
     {
         return $this->hasMany(Message::class);
     }
-    public function sponsorships(){
+    public function sponsorships()
+    {
 
         return $this->belongsToMany(sponsorship::class);
-
     }
-    public function services(){
+    public function services()
+    {
 
         return $this->belongsToMany(Service::class);
-        
     }
-    
-    use HasFactory;
 }
