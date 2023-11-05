@@ -5,7 +5,7 @@
         <!-- Single apartment -->
         <h3>Messaggi per l'appartamento"{{ $apartment_name }}"</h3>
         @foreach ($messages as $message)
-            <div class="card my-4">
+            <div class="card my-2 w-75">
                 <div class="card-body">
                     <h5 class="card-title">{{ $message->name, $message->last_name }}</h5>
                     {{-- <a href="{{ route('apartments.show', $apartment->id) }}" class="btn btn-warning">Show</a>
@@ -18,6 +18,7 @@
                     <a href="{{ route('messages.index', $apartment->id) }}" class="btn btn-warning">Messaggi</a> --}}
 
                 </div>
+            </div>
         @endforeach
     </div>
 @endsection

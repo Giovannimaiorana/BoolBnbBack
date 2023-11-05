@@ -4,6 +4,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\VisitController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Message;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     Route::resource('messages', MessageController::class);
     Route::get('apartments/{apartment_id}/messages', [MessageController::class, 'index'])->name('messages.index');
+
+    Route::resource('visits', VisitController::class);
+    Route::get('apartments/{apartment_id}/visits', [VisitController::class, 'index'])->name('visits.index');
 
     // Route::resource('products', ProductController::class);
     // Route::delete('delete-image/{path}', [DeleteImg::class, 'delete'])->name('delete.img');
